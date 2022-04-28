@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style type="text/css">
+            .column {
+                float: left;
+                width: 50%;
+            }
+
+            /* Clear floats after the columns */
+            .row:after {
+                content: "";
+                display: table;
+                clear: both;
+            }
+
+            .text-right {
+                text-align: right;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div>
+            <div class="header" style="text-align: center;">
+                <h1 class="header"><%= body.firstname + " " + body.lastname %></h1>
+                <p><%= body.email + " - " + body.phone %></p>
+            </div>
+
+            <p><%= body.summary %></p>
+
+    
+            <h3>Experience</h3>
+            <% for (var i = 0; i < body.experiences.length; i++) { %>
+                <div class="row">
+                    <div class="column">
+                        <h5><%= body.experiences[i].employer_title %></h5>
+                        <p><%= body.experiences[i].employer_name %></p>
+                    </div>
+                    <div class="column text-right">
+                        <p><%= new Date(body.experiences[i].employer_start).toLocaleDateString('en-us', { year:"numeric", month:"short"}) %> - <%= new Date(body.experiences[i].employer_end).toLocaleDateString('en-us', { year:"numeric", month:"short"}) %></p>
+                    </div>
+                  </div> 
+
+                <p><%= body.experiences[i].description %></p>
+            <% } %>
+
+            <br/>
+
+            <h3>Education</h3>
+            <% for (var i = 0; i < body.educations.length; i++) { %>
+                <div class="row">
+                    <div class="column">
+                        <h5><%= body.educations[i].school_degree %></h5>
+                        <p><%= body.educations[i].school_name %></p>
+                    </div>
+                    <div class="column text-right">
+                        <p><%= body.educations[i].school_grad_year %></p>
+                    </div>
+                  </div>             
+
+                <p><%= body.educations[i].description %></p>
+            <% } %>            
+        </div>
+
+    </body>
+  </html>
